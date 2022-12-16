@@ -30,5 +30,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to cluster'){
+            steps {
+                sh 'mkdir /etc/deploy'
+                sh 'cp config /etc/deploy'
+                sh 'kubectl config get-contexts'
+            }
+        }
     }
 }
