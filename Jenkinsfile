@@ -18,6 +18,7 @@ pipeline {
                 script {
                     docker.build("harbor.kindt.io/library/hello-world:${TAG}")
                 }
+                sh 'whoami'
             }
         }
         stage('Pushing Docker Image to Dockerhub') {
@@ -33,7 +34,8 @@ pipeline {
         stage('Deploy to cluster'){
             steps {
 //                 sh 'sudo cp config /root/.kube/'
-                sh 'kubectl config get-contexts'
+//                 sh 'kubectl config get-contexts'
+                sh 'whoami'
             }
         }
     }
