@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deploy to cluster'){
             steps {
-                sh 'sudo cp config /root/.kube/'
+                sh 'cp config /root/.kube/'
                 sh 'kubectl config get-contexts'
             }
         }
