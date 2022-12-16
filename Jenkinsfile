@@ -16,7 +16,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    sh 'docker build -t "harbor.kiendt.io/library/hello-world:${TAG}" .'
+                    docker.build("harbor.kiendt.io/library/hello-world:${TAG}")
                 }
             }
         }
