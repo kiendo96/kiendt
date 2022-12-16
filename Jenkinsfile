@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven '3.6.3' 
+        maven 'maven-3.6.3' 
     }
     environment {
         DATE = new Date().format('yy.M')
@@ -17,6 +17,16 @@ pipeline {
             steps {
                 script {
                     docker.build("harbor.kindt.io/library/hello-world:${TAG}")
+                }
+            }
+        }
+        stage('Pushing Docker Image to Dockerhub') {
+            steps {
+                script {
+                    docker.withRegistry('http://harbor.kindt.io/', 'docker_credential') {
+                        docker.image("harbor.kindt.io/library/hello-world:${TAG}").push()
+                        docker.image("harbor.kindt.io/library/hello-world:${TAG}").push("latest")
+                    }
                 }
             }
         }
