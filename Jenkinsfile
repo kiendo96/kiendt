@@ -16,7 +16,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("harbor.kindt.io/library/hello-world:${TAG}")
+                    docker.build("harbor.kindt.io/library/my-app:${TAG}")
                 }
                 sh 'whoami'
             }
@@ -25,8 +25,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('http://harbor.kindt.io/', 'docker_credential') {
-                        docker.image("harbor.kindt.io/library/hello-world:${TAG}").push()
-                        docker.image("harbor.kindt.io/library/hello-world:${TAG}").push("latest")
+                        docker.image("harbor.kindt.io/library/my-app:${TAG}").push()
+                        docker.image("harbor.kindt.io/library/my-app:${TAG}").push("latest")
                     }
                 }
             }
