@@ -34,6 +34,8 @@ pipeline {
         stage('Deploy to cluster'){
             steps {
                 sh 'sudo cp config /root/.kube/'
+                sh 'update new code to server'
+                sh 'tao cung khong hieu lam'
             }
         }
     }
